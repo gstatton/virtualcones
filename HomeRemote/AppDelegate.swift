@@ -30,13 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         locationManager!.pausesLocationUpdatesAutomatically = false
 
         
-        //let uuidString = ["A4951234-C5B1-4B44-B512-1370F02D74DE","A4952345-C5B1-4B44-B512-1370F02D74DE"]
-        let uuidString = "A4951234-C5B1-4B44-B512-1370F02D74DE"
+        let uuidString = ["A4951234-C5B1-4B44-B512-1370F02D74DE","A4952345-C5B1-4B44-B512-1370F02D74DE"]
+        //let uuidString = "A4951234-C5B1-4B44-B512-1370F02D74DE"
         let beaconIdentifier = "3Wandel"
         
-       // for id in uuidString{
-            NSLog("monitoring for UUID: \(uuidString)")
-            let beaconUUID:NSUUID = NSUUID(UUIDString: uuidString)!
+        for id in uuidString{
+            NSLog("monitoring for UUID: \(id)")
+            let beaconUUID:NSUUID = NSUUID(UUIDString: id)!
             let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,
                 identifier: beaconIdentifier)
         
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             locationManager!.startRangingBeaconsInRegion(beaconRegion)
             locationManager!.startUpdatingLocation()
             
-       // }
+        }
         
         if(application.respondsToSelector("registerUserNotificationSettings:")) {
             application.registerUserNotificationSettings(

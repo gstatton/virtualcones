@@ -14,6 +14,7 @@
 		F4A6F0041B0BB83A00C59EC9 /* HomeRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4A6F0031B0BB83A00C59EC9 /* HomeRemoteTests.swift */; };
 		F4A6F00E1B0BB8B500C59EC9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F4A6F00D1B0BB8B500C59EC9 /* CoreLocation.framework */; };
 		F4A6F0101B0BBD8300C59EC9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4A6F00F1B0BBD8300C59EC9 /* Main.storyboard */; };
+		F4A6F0121B0BBEED00C59EC9 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4A6F0111B0BBEED00C59EC9 /* Launch Screen.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		F4A6F0031B0BB83A00C59EC9 /* HomeRemoteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRemoteTests.swift; sourceTree = "<group>"; };
 		F4A6F00D1B0BB8B500C59EC9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F4A6F00F1B0BBD8300C59EC9 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F4A6F0111B0BBEED00C59EC9 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +86,7 @@
 				F4A6EFEA1B0BB83A00C59EC9 /* AppDelegate.swift */,
 				F4A6EFEF1B0BB83A00C59EC9 /* ViewController.swift */,
 				F4A6F00F1B0BBD8300C59EC9 /* Main.storyboard */,
+				F4A6F0111B0BBEED00C59EC9 /* Launch Screen.xib */,
 				F4A6EFF41B0BB83A00C59EC9 /* Images.xcassets */,
 				F4A6EFEC1B0BB83A00C59EC9 /* HomeRemote.xcdatamodeld */,
 				F4A6EFE81B0BB83A00C59EC9 /* Supporting Files */,
@@ -199,6 +202,7 @@
 			files = (
 				F4A6F0101B0BBD8300C59EC9 /* Main.storyboard in Resources */,
 				F4A6EFF51B0BB83A00C59EC9 /* Images.xcassets in Resources */,
+				F4A6F0121B0BBEED00C59EC9 /* Launch Screen.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
