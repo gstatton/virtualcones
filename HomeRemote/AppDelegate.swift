@@ -30,13 +30,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         locationManager!.pausesLocationUpdatesAutomatically = false
 
         
-        let uuidString = ["A4951234-C5B1-4B44-B512-1370F02D74DE","A4952345-C5B1-4B44-B512-1370F02D74DE"]
-        //let uuidString = "A4951234-C5B1-4B44-B512-1370F02D74DE"
+       // let uuidString = ["A4951234-C5B1-4B44-B512-1370F02D74DE","A4950929-C5B1-4B44-B512-1370F02D74DE"]
+        let uuidString = "A4951234-C5B1-4B44-B512-1370F02D74DE"
         let beaconIdentifier = "3Wandel"
         
-        for id in uuidString{
-            NSLog("monitoring for UUID: \(id)")
-            let beaconUUID:NSUUID = NSUUID(UUIDString: id)!
+        //for id in uuidString{
+            NSLog("monitoring for UUID: \(uuidString)")
+            let beaconUUID:NSUUID = NSUUID(UUIDString: uuidString)!
             let beaconRegion:CLBeaconRegion = CLBeaconRegion(proximityUUID: beaconUUID,
                 identifier: beaconIdentifier)
         
@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
             locationManager!.startRangingBeaconsInRegion(beaconRegion)
             locationManager!.startUpdatingLocation()
             
-        }
+        //}
         
         if(application.respondsToSelector("registerUserNotificationSettings:")) {
             application.registerUserNotificationSettings(
@@ -194,12 +194,12 @@ extension AppDelegate: CLLocationManagerDelegate {
         
         if(turnLights) {
             //Turn on Lights
-            self.put(["on":true], url: "http://10.0.0.3/api/newdeveloper/groups/4/action") { (succeeded: Bool, msg: String) -> () in
+            self.put(["on":true], url: "http://10.0.0.3/api/newdeveloper/groups/\(groups)/action") { (succeeded: Bool, msg: String) -> () in
             }
             
         } else {
             //Turn off Lights
-            self.put(["on":false], url: "http://10.0.0.3/api/newdeveloper/groups/4/action") { (succeeded: Bool, msg: String) -> () in
+            self.put(["on":false], url: "http://10.0.0.3/api/newdeveloper/groups/\(groups)/action") { (succeeded: Bool, msg: String) -> () in
                 
             }
             
@@ -221,29 +221,37 @@ extension AppDelegate: CLLocationManagerDelegate {
             
             var message:String = ""
             var turnLights = false
+            var groups = 0
             
             NSLog("Beacon Count: \(beacons.count)")
             
             if(beacons.count > 0) {
                 let nearestBeacon:CLBeacon = beacons[0] as! CLBeacon
+                NSLog("This is the nearest beacon: \(beacons[0].major)")
+                let beaconMajor = beacons[0].major
                 
                 if(nearestBeacon.proximity == lastProximity ||
                     nearestBeacon.proximity == CLProximity.Unknown) {
                         return;
                 }
                 lastProximity = nearestBeacon.proximity;
-                switch nearestBeacon.accuracy {
-                case -1...0:
-                    return
-                case 0.1...15:
-                    message = "You are in the Room!: \(nearestBeacon.accuracy)"
-                    turnLights = true
-                case 15...100:
-                    message = "You are Outisde the Room!: \(nearestBeacon.accuracy)"
-                    turnLights = true
-                default:
-                    message = "You're LOST!!!"
-                    turnLights = false
+                //switch nearestBeacon.accuracy {
+                switch beaconMajor {
+                    case 1:
+                        message = "You're in the Living Room"
+                        turnLights = true
+                        groups = 4
+                        self.put(["on":false], url: "http://10.0.0.3/api/newdeveloper/groups/5/action"){ (succeeded: Bool, msg: String) -> () in}
+
+                    case 2:
+                        message = "You're in the Hallway"
+                        turnLights = true
+                        groups = 5
+                        self.put(["on":false], url: "http://10.0.0.3/api/newdeveloper/groups/4/action"){ (succeeded: Bool, msg: String) -> () in}
+
+                    default:
+                        turnLights = false
+                        groups = 0
                 }
             }else {
                 
@@ -258,7 +266,7 @@ extension AppDelegate: CLLocationManagerDelegate {
             }
             
             NSLog("%@", message)
-            sendLocalNotificationWithMessage(message, turnLights: turnLights, groups: 4)
+            sendLocalNotificationWithMessage(message, turnLights: turnLights, groups: groups)
     }
     
     
@@ -269,7 +277,7 @@ extension AppDelegate: CLLocationManagerDelegate {
             
             NSLog("You entered the region")
             
-            sendLocalNotificationWithMessage("You entered the region", turnLights: true, groups: 4)
+          //  sendLocalNotificationWithMessage("You entered the region", turnLights: true, groups: 4)
             
     }
     
@@ -280,7 +288,7 @@ extension AppDelegate: CLLocationManagerDelegate {
             
             NSLog("You exited the region")
             
-            sendLocalNotificationWithMessage("You exited the region", turnLights: false, groups: 4)
+          //  sendLocalNotificationWithMessage("You exited the region", turnLights: false, groups: 4)
             
     }
     
